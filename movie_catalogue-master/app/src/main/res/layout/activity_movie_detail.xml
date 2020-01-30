@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	android:fillViewport="true">
+
+	<androidx.constraintlayout.widget.ConstraintLayout
+		android:layout_width="match_parent"
+		android:layout_height="wrap_content"
+		tools:context=".ui.detail.MovieDetailActivity">
+
+		<androidx.constraintlayout.widget.Guideline
+			android:id="@+id/backdrop_guideline"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:orientation="horizontal"
+			app:layout_constraintGuide_percent="0.4" />
+
+		<ProgressBar
+			android:id="@+id/progress_bar_detail"
+			style="?android:attr/progressBarStyle"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:visibility="gone"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="parent" />
+
+		<ImageView
+			android:id="@+id/iv_movie_backdrop"
+			android:layout_width="0dp"
+			android:layout_height="0dp"
+			android:contentDescription="@string/movie_backdrop"
+			android:scaleType="centerCrop"
+			app:layout_constraintBottom_toBottomOf="@+id/backdrop_guideline"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="parent"
+			tools:src="@android:color/darker_gray" />
+
+		<androidx.cardview.widget.CardView
+			android:id="@+id/cv_movie_poster_detail"
+			android:layout_width="100dp"
+			android:layout_height="150dp"
+			android:layout_marginStart="@dimen/activity_horizontal_margin"
+			app:cardCornerRadius="4dp"
+			app:layout_constraintBottom_toTopOf="@+id/backdrop_guideline"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="@+id/backdrop_guideline">
+
+			<ImageView
+				android:id="@+id/iv_movie_poster_detail"
+				android:layout_width="match_parent"
+				android:layout_height="match_parent"
+				android:contentDescription="@string/movie_poster"
+				android:scaleType="fitXY"
+				tools:src="@android:color/darker_gray" />
+
+		</androidx.cardview.widget.CardView>
+
+		<TextView
+			android:id="@+id/tv_movie_title_detail"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="@dimen/activity_horizontal_margin"
+			android:layout_marginTop="8dp"
+			android:layout_marginEnd="@dimen/activity_horizontal_margin"
+			android:textColor="@android:color/black"
+			android:textSize="18sp"
+			android:textStyle="bold"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toEndOf="@+id/cv_movie_poster_detail"
+			app:layout_constraintTop_toBottomOf="@+id/backdrop_guideline"
+			tools:text="@string/title" />
+
+		<TextView
+			android:id="@+id/tv_movie_genres_detail"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="@dimen/activity_horizontal_margin"
+			android:layout_marginTop="4dp"
+			android:layout_marginEnd="@dimen/activity_horizontal_margin"
+			android:textSize="14sp"
+			android:textStyle="bold|italic"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toEndOf="@+id/cv_movie_poster_detail"
+			app:layout_constraintTop_toBottomOf="@+id/tv_movie_title_detail"
+			tools:text="@string/genres" />
+
+		<TextView
+			android:id="@+id/tv_movie_release_date_detail"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="@dimen/activity_horizontal_margin"
+			android:layout_marginTop="4dp"
+			android:layout_marginEnd="@dimen/activity_horizontal_margin"
+			android:textSize="12sp"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toEndOf="@+id/cv_movie_poster_detail"
+			app:layout_constraintTop_toBottomOf="@+id/tv_movie_genres_detail"
+			tools:text="@string/release_date" />
+
+		<RatingBar
+			android:id="@+id/rating_bar_movie"
+			style="@style/Widget.AppCompat.RatingBar.Small"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:layout_marginTop="11dp"
+			android:numStars="5"
+			android:visibility="visible"
+			app:layout_constraintEnd_toEndOf="@+id/cv_movie_poster_detail"
+			app:layout_constraintStart_toStartOf="@+id/cv_movie_poster_detail"
+			app:layout_constraintTop_toBottomOf="@+id/cv_movie_poster_detail"
+			app:layout_goneMarginStart="@dimen/activity_horizontal_margin" />
+
+		<androidx.constraintlayout.widget.Barrier
+			android:id="@+id/barrier"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			app:barrierDirection="bottom"
+			app:constraint_referenced_ids="rating_bar_movie,tv_movie_release_date_detail" />
+
+		<TextView
+			android:id="@+id/tv_movie_overview_detail"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="@dimen/activity_horizontal_margin"
+			android:layout_marginTop="@dimen/activity_vertical_margin"
+			android:layout_marginEnd="@dimen/activity_horizontal_margin"
+			android:textSize="14sp"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@+id/barrier"
+			tools:text="@string/overview" />
+
+		<Button
+			android:id="@+id/btn_favourite"
+			style="@style/Widget.AppCompat.Button.Colored"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginStart="@dimen/activity_horizontal_margin"
+			android:layout_marginTop="8dp"
+			android:layout_marginEnd="@dimen/activity_horizontal_margin"
+			android:text="@string/add_to_favourite"
+			android:visibility="visible"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toBottomOf="@+id/tv_movie_overview_detail" />
+
+	</androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

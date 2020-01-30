@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Submission1</string>
+    <string name="title_movie">Movie</string>
+    <string name="title_tv_show">Tv Show</string>
+
+    <string name="content_poster">Content Poster</string>
+    <string name="content_title">Content Title</string>
+    <string name="content_date">Content Date</string>
+    <string name="content_overview">Content Overview</string>
+    <string name="content_rating">Content Overview</string>
+    <string name="director">Director</string>
+
+</resources>

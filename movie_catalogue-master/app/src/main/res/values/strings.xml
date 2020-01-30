@@ -1,0 +1,38 @@
+<resources>
+	<string name="app_name">Movie Catalogue</string>
+	<string name="movies">Movies</string>
+	<string name="tv_shows">TV Shows</string>
+	<string name="movie_poster">Movie Poster</string>
+	<string name="movie_backdrop">Movie Backdrop</string>
+	<string name="title">Title</string>
+	<string name="genres">Genres</string>
+	<string name="release_date">Release Date</string>
+	<string name="user_score">User Score</string>
+	<string name="overview">Overview</string>
+	<string name="no_overview">There is no Overview for this Movie.</string>
+	<string name="favourites">Favourites</string>
+	<string name="add_to_favourite">Add to Favourite</string>
+	<string name="remove_from_favourite">Remove from Favourite</string>
+	<string name="delete_message_success">%1$s has been removed from Favourite</string>
+	<string name="delete_message_failed">Failed to remove %1$s from Favourite</string>
+	<string name="insert_message_success">%1$s has been added to Favourite</string>
+	<string name="insert_message_failed">Failed to add %1$s to Favourite</string>
+	<string name="empty_favourites">Favourites is empty! Try add a movie or tv show to Favourites.</string>
+	<string name="appwidget_text">Favourite Movies &amp; Tv Shows</string>
+	<string name="settings">Settings</string>
+	<string name="search_movies">Search movies</string>
+	<string name="search_tv_shows">Search tv shows</string>
+
+	<!-- Preference Titles -->
+	<string name="language_header">Language</string>
+	<string name="reminder_header">Reminder</string>
+
+	<!-- Language Preferences -->
+	<string name="language_title">Change language</string>
+
+	<!-- Reminder Preferences -->
+	<string name="daily_title">Enable daily reminder</string>
+	<string name="daily_summary">Send notifications to return to the Movie Catalogue Application</string>
+	<string name="release_today_title">Enable release today reminder</string>
+	<string name="release_today_summary">Send notifications for all movies released today</string>
+</resources>
