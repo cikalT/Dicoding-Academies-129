@@ -7,18 +7,20 @@ import com.dicoding.academies.data.source.remote.response.ModuleResponse
 import org.json.JSONException
 import org.json.JSONObject
 import java.io.IOException
+import java.util.*
 
 class JsonHelper(private val context: Context) {
 
-    private fun parsingFileToString(fileName: String) : String? {
+    private fun parsingFileToString(fileName: String): String? {
         return try {
             val `is` = context.assets.open(fileName)
             val buffer = ByteArray(`is`.available())
             `is`.read(buffer)
             `is`.close()
             String(buffer)
-        } catch (e: IOException) {
-            e.printStackTrace()
+
+        } catch (ex: IOException) {
+            ex.printStackTrace()
             null
         }
     }
@@ -45,7 +47,6 @@ class JsonHelper(private val context: Context) {
         }
         return list
     }
-
 
     fun loadModule(courseId: String): List<ModuleResponse> {
         val fileName = String.format("Module_%s.json", courseId)
@@ -88,3 +89,4 @@ class JsonHelper(private val context: Context) {
         return contentResponse as ContentResponse
     }
 }
+

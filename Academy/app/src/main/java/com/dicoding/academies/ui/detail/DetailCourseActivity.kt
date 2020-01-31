@@ -2,7 +2,9 @@ package com.dicoding.academies.ui.detail
 
 import android.content.Intent
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -16,7 +18,6 @@ import kotlinx.android.synthetic.main.activity_detail_course.*
 import kotlinx.android.synthetic.main.content_detail_course.*
 
 class DetailCourseActivity : AppCompatActivity() {
-
     companion object {
         const val EXTRA_COURSE = "extra_course"
     }
@@ -29,21 +30,6 @@ class DetailCourseActivity : AppCompatActivity() {
 
         val adapter = DetailCourseAdapter()
 
-//        val extras = intent.extras
-//        if (extras != null) {
-//            val courseId = extras.getString(EXTRA_COURSE)
-//            if (courseId != null) {
-//                val modules = DataDummy.generateDummyModules(courseId)
-//                adapter.setModules(modules)
-//                for(course in DataDummy.generateDummyCourses()) {
-//                    if(course.courseId == courseId) {
-//                        populateCourse(course)
-//                    }
-//                }
-//            }
-//        }
-
-//        val viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())[DetailCourseViewModel::class.java]
         val factory = ViewModelFactory.getInstance(this)
         val viewModel = ViewModelProvider(this, factory)[DetailCourseViewModel::class.java]
 
@@ -52,20 +38,23 @@ class DetailCourseActivity : AppCompatActivity() {
             val courseId = extras.getString(EXTRA_COURSE)
             if (courseId != null) {
                 viewModel.setSelectedCourse(courseId)
-                val modules = viewModel.getModules()
-                adapter.setModules(modules)
-                populateCourse(viewModel.getCourse())
+                progress_bar.visibility = View.VISIBLE
+                viewModel.getModules().observe(this, Observer { modules ->
+                    progress_bar.visibility = View.GONE
+                    adapter.setModules(modules)
+                    adapter.notifyDataSetChanged()
+                })
+                viewModel.getCourse().observe(this, Observer { course -> populateCourse(course) })
+
             }
         }
 
-        with(rv_module) {
-            isNestedScrollingEnabled = false
-            layoutManager = LinearLayoutManager(this@DetailCourseActivity)
-            setHasFixedSize(true)
-            this.adapter = adapter
-            val dividerItemDecoration = DividerItemDecoration(rv_module.context, DividerItemDecoration.VERTICAL)
-            addItemDecoration(dividerItemDecoration)
-        }
+        rv_module.isNestedScrollingEnabled = false
+        rv_module.layoutManager = LinearLayoutManager(this)
+        rv_module.setHasFixedSize(true)
+        rv_module.adapter = adapter
+        val dividerItemDecoration = DividerItemDecoration(rv_module.context, DividerItemDecoration.VERTICAL)
+        rv_module.addItemDecoration(dividerItemDecoration)
     }
 
     private fun populateCourse(courseEntity: CourseEntity) {

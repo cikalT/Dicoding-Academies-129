@@ -7,17 +7,15 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.app.ShareCompat
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+
 import com.dicoding.academies.R
 import com.dicoding.academies.data.source.local.entity.CourseEntity
 import com.dicoding.academies.viewmodel.ViewModelFactory
 import kotlinx.android.synthetic.main.fragment_bookmark.*
 
-
-/**
- * A simple [Fragment] subclass.
- */
 class BookmarkFragment : Fragment(), BookmarkFragmentCallback {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -29,28 +27,23 @@ class BookmarkFragment : Fragment(), BookmarkFragmentCallback {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         if (activity != null) {
-//            val courses = DataDummy.generateDummyCourses()
-//            val adapter = BookmarkAdapter(this)
-//            adapter.setCourses(courses)
-//
-//            with(rv_bookmark) {
-//                layoutManager = LinearLayoutManager(context)
-//                setHasFixedSize(true)
-//                this.adapter = adapter
-//            }
-
-//            val viewModel = ViewModelProvider(this, ViewModelProvider.NewInstanceFactory())[BookmarkViewModel::class.java]
             val factory = ViewModelFactory.getInstance(requireActivity())
             val viewModel = ViewModelProvider(this, factory)[BookmarkViewModel::class.java]
-
-            val courses = viewModel.getBookmarks()
+//            val courses = viewModel.getBookmarks()
 
             val adapter = BookmarkAdapter(this)
-            adapter.setCourses(courses)
+            progress_bar.visibility = View.VISIBLE
+            viewModel.getBookmarks().observe(this, Observer{ courses ->
+                progress_bar.visibility = View.GONE
+                adapter.setCourses(courses)
+                adapter.notifyDataSetChanged()
+            })
 
-            rv_bookmark.layoutManager = LinearLayoutManager(context)
-            rv_bookmark.setHasFixedSize(true)
-            rv_bookmark.adapter = adapter
+            with(rv_bookmark) {
+                layoutManager = LinearLayoutManager(context)
+                setHasFixedSize(true)
+                this.adapter = adapter
+            }
         }
     }
 
@@ -61,7 +54,7 @@ class BookmarkFragment : Fragment(), BookmarkFragmentCallback {
                     .from(activity)
                     .setType(mimeType)
                     .setChooserTitle("Bagikan aplikasi ini sekarang.")
-                    .setText(resources.getString(R.string.share_text, course.title))
+                    .setText("Segera daftar kelas ${course.title} di dicoding.com")
                     .startChooser()
         }
     }

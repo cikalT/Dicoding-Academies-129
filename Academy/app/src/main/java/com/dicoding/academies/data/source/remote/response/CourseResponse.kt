@@ -11,3 +11,4 @@ data class CourseResponse(
         var date: String,
         var imagePath: String
 ) : Parcelable
+

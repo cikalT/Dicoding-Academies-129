@@ -1,20 +1,12 @@
-package com.dicoding.academies.data.source
+package com.dicoding.academies.data
 
 import com.dicoding.academies.data.source.local.entity.ContentEntity
 import com.dicoding.academies.data.source.local.entity.CourseEntity
 import com.dicoding.academies.data.source.local.entity.ModuleEntity
 import com.dicoding.academies.data.source.remote.RemoteDataSource
+import java.util.*
 
-class AcademyRepository private constructor(private val remoteDataSource: RemoteDataSource) : AcademyDataSource {
-
-    companion object {
-        @Volatile
-        private var instance: AcademyRepository? = null
-        fun getInstance(remoteData: RemoteDataSource): AcademyRepository =
-                instance ?: synchronized(this) {
-                    instance ?: AcademyRepository(remoteData)
-                }
-    }
+class FakeAcademyRepository(private val remoteDataSource: RemoteDataSource) : AcademyDataSource {
 
     override fun getAllCourses(): ArrayList<CourseEntity> {
         val courseResponses = remoteDataSource.getAllCourses()
@@ -26,6 +18,7 @@ class AcademyRepository private constructor(private val remoteDataSource: Remote
                     response.date,
                     false,
                     response.imagePath)
+
             courseList.add(course)
         }
         return courseList
@@ -46,6 +39,7 @@ class AcademyRepository private constructor(private val remoteDataSource: Remote
         return courseList
     }
 
+    // Pada metode ini di modul selanjutnya akan mengembalikan kelas POJO baru, gabungan antara course dengan module-nya.
     override fun getCourseWithModules(courseId: String): CourseEntity {
         val courseResponses = remoteDataSource.getAllCourses()
         lateinit var course: CourseEntity
@@ -71,10 +65,12 @@ class AcademyRepository private constructor(private val remoteDataSource: Remote
                     response.title,
                     response.position,
                     false)
+
             moduleList.add(course)
         }
         return moduleList
     }
+
 
     override fun getContent(courseId: String, moduleId: String): ModuleEntity {
         val moduleResponses = remoteDataSource.getModules(courseId)
@@ -93,3 +89,4 @@ class AcademyRepository private constructor(private val remoteDataSource: Remote
         return module
     }
 }
+
