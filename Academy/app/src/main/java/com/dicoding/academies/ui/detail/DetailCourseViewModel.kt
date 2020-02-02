@@ -7,7 +7,7 @@ import com.dicoding.academies.data.source.local.entity.CourseEntity
 import com.dicoding.academies.data.source.local.entity.ModuleEntity
 
 class DetailCourseViewModel(private val academyRepository: AcademyRepository) : ViewModel() {
-    private lateinit var courseId: String
+    lateinit var courseId: String
 
     fun setSelectedCourse(courseId: String) {
         this.courseId = courseId

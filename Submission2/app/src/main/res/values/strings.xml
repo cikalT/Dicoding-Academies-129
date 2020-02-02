@@ -3,4 +3,11 @@
     <string name="tab_movies">Movies</string>
     <string name="tab_tv_shows">TV Shows</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="content_poster">Content Poster</string>
+    <string name="content_title">Content Title</string>
+    <string name="content_date">Content Date</string>
+    <string name="content_overview">Content Overview</string>
+    <string name="content_rating">Content Overview</string>
+    <string name="director">Director</string>
 </resources>

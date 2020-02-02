@@ -10,12 +10,15 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-
 import com.dicoding.academies.R
 import com.dicoding.academies.data.source.local.entity.CourseEntity
 import com.dicoding.academies.viewmodel.ViewModelFactory
 import kotlinx.android.synthetic.main.fragment_bookmark.*
 
+
+/**
+ * A simple [Fragment] subclass.
+ */
 class BookmarkFragment : Fragment(), BookmarkFragmentCallback {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -29,7 +32,6 @@ class BookmarkFragment : Fragment(), BookmarkFragmentCallback {
         if (activity != null) {
             val factory = ViewModelFactory.getInstance(requireActivity())
             val viewModel = ViewModelProvider(this, factory)[BookmarkViewModel::class.java]
-//            val courses = viewModel.getBookmarks()
 
             val adapter = BookmarkAdapter(this)
             progress_bar.visibility = View.VISIBLE

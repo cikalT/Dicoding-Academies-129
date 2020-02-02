@@ -14,6 +14,10 @@ import com.dicoding.academies.ui.reader.CourseReaderViewModel
 import com.dicoding.academies.viewmodel.ViewModelFactory
 import kotlinx.android.synthetic.main.fragment_module_content.*
 
+
+/**
+ * A simple [Fragment] subclass.
+ */
 class ModuleContentFragment : Fragment() {
 
     companion object {
@@ -33,6 +37,7 @@ class ModuleContentFragment : Fragment() {
         if (activity != null) {
             val factory = ViewModelFactory.getInstance(requireActivity())
             val viewModel = ViewModelProvider(requireActivity(), factory)[CourseReaderViewModel::class.java]
+
             progress_bar.visibility = View.VISIBLE
             viewModel.getSelectedModule().observe(this, Observer{ module ->
                 if (module != null) {

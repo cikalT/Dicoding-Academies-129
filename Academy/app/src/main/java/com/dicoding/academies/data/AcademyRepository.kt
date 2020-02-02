@@ -6,10 +6,11 @@ import com.dicoding.academies.data.source.local.entity.ContentEntity
 import com.dicoding.academies.data.source.local.entity.CourseEntity
 import com.dicoding.academies.data.source.local.entity.ModuleEntity
 import com.dicoding.academies.data.source.remote.RemoteDataSource
+import com.dicoding.academies.data.source.remote.RemoteDataSource.LoadCoursesCallback
 import com.dicoding.academies.data.source.remote.response.ContentResponse
 import com.dicoding.academies.data.source.remote.response.CourseResponse
 import com.dicoding.academies.data.source.remote.response.ModuleResponse
-import java.util.*
+
 
 class AcademyRepository private constructor(private val remoteDataSource: RemoteDataSource) : AcademyDataSource {
 
@@ -25,7 +26,7 @@ class AcademyRepository private constructor(private val remoteDataSource: Remote
 
     override fun getAllCourses(): LiveData<List<CourseEntity>> {
         val courseResults = MutableLiveData<List<CourseEntity>>()
-        remoteDataSource.getAllCourses(object : RemoteDataSource.LoadCoursesCallback {
+        remoteDataSource.getAllCourses(object : LoadCoursesCallback {
             override fun onAllCoursesReceived(courseResponses: List<CourseResponse>) {
                 val courseList = ArrayList<CourseEntity>()
                 for (response in courseResponses) {
@@ -46,9 +47,10 @@ class AcademyRepository private constructor(private val remoteDataSource: Remote
 
     override fun getBookmarkedCourses(): LiveData<List<CourseEntity>> {
         val courseResults = MutableLiveData<List<CourseEntity>>()
-        remoteDataSource.getAllCourses(object : RemoteDataSource.LoadCoursesCallback {
+
+        remoteDataSource.getAllCourses(object : LoadCoursesCallback {
             override fun onAllCoursesReceived(courseResponses: List<CourseResponse>) {
-                val courseList = java.util.ArrayList<CourseEntity>()
+                val courseList = ArrayList<CourseEntity>()
                 for (response in courseResponses) {
                     val course = CourseEntity(response.id,
                             response.title,
@@ -64,10 +66,10 @@ class AcademyRepository private constructor(private val remoteDataSource: Remote
         return courseResults
     }
 
-    // Pada metode ini di modul selanjutnya akan mengembalikan kelas POJO baru, gabungan antara course dengan module-nya.
     override fun getCourseWithModules(courseId: String): LiveData<CourseEntity> {
         val courseResult = MutableLiveData<CourseEntity>()
-        remoteDataSource.getAllCourses(object : RemoteDataSource.LoadCoursesCallback {
+
+        remoteDataSource.getAllCourses(object : LoadCoursesCallback {
             override fun onAllCoursesReceived(courseResponses: List<CourseResponse>) {
                 lateinit var course: CourseEntity
                 for (response in courseResponses) {
@@ -83,11 +85,13 @@ class AcademyRepository private constructor(private val remoteDataSource: Remote
                 courseResult.postValue(course)
             }
         })
+
         return courseResult
     }
 
     override fun getAllModulesByCourse(courseId: String): LiveData<List<ModuleEntity>> {
         val moduleResults = MutableLiveData<List<ModuleEntity>>()
+
         remoteDataSource.getModules(courseId, object : RemoteDataSource.LoadModulesCallback {
             override fun onAllModulesReceived(moduleResponses: List<ModuleResponse>) {
                 val moduleList = ArrayList<ModuleEntity>()
@@ -103,12 +107,13 @@ class AcademyRepository private constructor(private val remoteDataSource: Remote
                 moduleResults.postValue(moduleList)
             }
         })
+
         return moduleResults
     }
 
-
     override fun getContent(courseId: String, moduleId: String): LiveData<ModuleEntity> {
         val moduleResult = MutableLiveData<ModuleEntity>()
+
         remoteDataSource.getModules(courseId, object : RemoteDataSource.LoadModulesCallback {
             override fun onAllModulesReceived(moduleResponses: List<ModuleResponse>) {
                 lateinit var module: ModuleEntity
@@ -133,3 +138,4 @@ class AcademyRepository private constructor(private val remoteDataSource: Remote
         return moduleResult
     }
 }
+

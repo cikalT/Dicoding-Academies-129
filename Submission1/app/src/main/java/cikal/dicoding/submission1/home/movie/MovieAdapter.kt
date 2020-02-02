@@ -6,11 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
-import cikal.dicoding.submission1.data.MovieEntity
 import cikal.dicoding.submission1.R
+import cikal.dicoding.submission1.data.MovieEntity
 import cikal.dicoding.submission1.detail.movie.DetailMovieActivity
 import kotlinx.android.synthetic.main.item_content.view.*
-import java.util.ArrayList
+import java.util.*
+
 
 class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
 
@@ -40,7 +41,8 @@ class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
                 tv_title.text = movie.movieTitle
                 tv_date.text = movie.movieYear
                 tv_desc.text = movie.movieDesc
-                iv_poster.setImageResource(movie.moviePoster)
+                val mDrawableName = movie.moviePoster
+                iv_poster.setImageResource(resources.getIdentifier(mDrawableName, "drawable", context.packageName))
 
                 itemView.setOnClickListener {
                     Toast.makeText(context, movie.movieTitle, Toast.LENGTH_SHORT).show()

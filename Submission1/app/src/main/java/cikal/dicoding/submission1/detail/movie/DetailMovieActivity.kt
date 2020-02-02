@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 import cikal.dicoding.submission1.data.MovieEntity
 import cikal.dicoding.submission1.R
 import kotlinx.android.synthetic.main.activity_detail_movie.*
+import kotlinx.android.synthetic.main.item_content.view.*
 
 class DetailMovieActivity : AppCompatActivity() {
 
@@ -36,6 +37,7 @@ class DetailMovieActivity : AppCompatActivity() {
         tv_title.text = movie.movieTitle
         tv_year.text = movie.movieYear
         tv_desc.text = movie.movieDesc
-        iv_poster.setImageResource(movie.moviePoster)
+        val mDrawableName = movie.moviePoster
+        iv_poster.setImageResource(resources.getIdentifier(mDrawableName, "drawable", this.packageName))
     }
 }

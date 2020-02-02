@@ -10,7 +10,7 @@ import java.util.ArrayList
 
 object DataDummy {
 
-    fun generateDummyCourses(): List<CourseEntity> {
+    fun generateDummyCourses(): ArrayList<CourseEntity> {
 
         val courses = ArrayList<CourseEntity>()
 
@@ -47,7 +47,7 @@ object DataDummy {
         return courses
     }
 
-    fun generateDummyModules(courseId: String): List<ModuleEntity> {
+    fun generateDummyModules(courseId: String): ArrayList<ModuleEntity> {
 
         val modules = ArrayList<ModuleEntity>()
 
@@ -86,7 +86,7 @@ object DataDummy {
         return modules
     }
 
-    fun generateRemoteDummyCourses(): List<CourseResponse> {
+    fun generateRemoteDummyCourses(): ArrayList<CourseResponse> {
 
         val courses = ArrayList<CourseResponse>()
 
@@ -118,7 +118,7 @@ object DataDummy {
         return courses
     }
 
-    fun generateRemoteDummyModules(courseId: String): List<ModuleResponse> {
+    fun generateRemoteDummyModules(courseId: String): ArrayList<ModuleResponse> {
 
         val modules = ArrayList<ModuleResponse>()
 

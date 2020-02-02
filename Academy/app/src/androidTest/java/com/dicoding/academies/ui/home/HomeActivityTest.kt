@@ -11,6 +11,11 @@ import com.dicoding.academies.R
 import com.dicoding.academies.utils.DataDummy
 import org.junit.Rule
 import org.junit.Test
+import com.dicoding.academies.utils.EspressoIdlingResource
+import androidx.test.espresso.IdlingRegistry
+import org.junit.Before
+import org.junit.After
+
 
 class HomeActivityTest {
 
@@ -18,6 +23,16 @@ class HomeActivityTest {
 
     @get:Rule
     var activityRule = ActivityTestRule(HomeActivity::class.java)
+
+    @Before
+    fun setUp() {
+        IdlingRegistry.getInstance().register(EspressoIdlingResource.idlingResource)
+    }
+
+    @After
+    fun tearDown() {
+        IdlingRegistry.getInstance().unregister(EspressoIdlingResource.idlingResource)
+    }
 
     @Test
     fun loadCourses() {
