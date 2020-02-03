@@ -3,8 +3,10 @@ package cikal.dicoding.submission2.data.source
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import cikal.dicoding.submission2.data.source.local.entity.MovieEntity
+import cikal.dicoding.submission2.data.source.local.entity.TvShowEntity
 import cikal.dicoding.submission2.data.source.remote.RemoteDataSource
 import cikal.dicoding.submission2.data.source.remote.response.MovieResponse
+import cikal.dicoding.submission2.data.source.remote.response.TvShowResponse
 
 class CatalogueRepository private constructor(private val remoteDataSource: RemoteDataSource) : CatalogueDataSource {
 
@@ -35,7 +37,25 @@ class CatalogueRepository private constructor(private val remoteDataSource: Remo
                 movieResult.postValue(movieList)
             }
         })
-
         return movieResult
+    }
+
+    override fun getAllTvShows(): LiveData<List<TvShowEntity>> {
+        val tvShowResult = MutableLiveData<List<TvShowEntity>>()
+        remoteDataSource.getAllTvShow(object : RemoteDataSource.LoadTvShowsCallback {
+            override fun onAllTvShowsRecived(tvShowsResponse: List<TvShowResponse>) {
+                val tvShowList = ArrayList<TvShowEntity>()
+                for (response in tvShowsResponse) {
+                    val tvShow = TvShowEntity(response.tvShowId,
+                        response.tvShowTitle,
+                        response.tvShowPoster,
+                        response.tvShowYear,
+                        response.tvShowDesc)
+                    tvShowList.add(tvShow)
+                }
+                tvShowResult.postValue(tvShowList)
+            }
+        })
+        return tvShowResult
     }
 }

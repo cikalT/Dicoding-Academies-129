@@ -2,6 +2,8 @@ package cikal.dicoding.submission2.data.source.remote
 
 import android.os.Handler
 import cikal.dicoding.submission2.data.source.remote.response.MovieResponse
+import cikal.dicoding.submission2.data.source.remote.response.TvShowResponse
+import cikal.dicoding.submission2.utils.EspressoIdlingResource
 import cikal.dicoding.submission2.utils.JsonHelper
 
 class RemoteDataSource private constructor(private val jsonHelper: JsonHelper) {
@@ -21,10 +23,26 @@ class RemoteDataSource private constructor(private val jsonHelper: JsonHelper) {
     }
 
     fun getAllMovie(callback: LoadMoviesCallback) {
-        handler.postDelayed({ callback.onAllMoviesReceived(jsonHelper.loadMovies()) }, SERVICE_LATENCY_IN_MILLIS)
+        EspressoIdlingResource.increment()
+        handler.postDelayed({
+            callback.onAllMoviesReceived(jsonHelper.loadMovies())
+            EspressoIdlingResource.decrement()
+        }, SERVICE_LATENCY_IN_MILLIS)
+    }
+
+    fun getAllTvShow(callback: LoadTvShowsCallback) {
+        EspressoIdlingResource.increment()
+        handler.postDelayed({
+            callback.onAllTvShowsRecived(jsonHelper.loadTvShows())
+            EspressoIdlingResource.decrement()
+        }, SERVICE_LATENCY_IN_MILLIS)
     }
 
     interface LoadMoviesCallback {
         fun onAllMoviesReceived(moviesResponses: List<MovieResponse>)
+    }
+
+    interface LoadTvShowsCallback {
+        fun onAllTvShowsRecived(tvShowsResponse: List<TvShowResponse>)
     }
 }

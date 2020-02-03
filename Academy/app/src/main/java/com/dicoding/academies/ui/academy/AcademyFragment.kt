@@ -14,14 +14,10 @@ import com.dicoding.academies.viewmodel.ViewModelFactory
 import kotlinx.android.synthetic.main.fragment_academy.*
 
 
-/**
- * A simple [Fragment] subclass.
- */
 class AcademyFragment : Fragment() {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_academy, container, false)
     }
 

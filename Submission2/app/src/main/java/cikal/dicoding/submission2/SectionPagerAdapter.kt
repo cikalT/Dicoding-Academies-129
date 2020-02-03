@@ -6,6 +6,8 @@ import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
+import cikal.dicoding.submission2.ui.movie.MovieFragment
+import cikal.dicoding.submission2.ui.tvshow.TvShowFragment
 
 class SectionPagerAdapter(private val context: Context, fm: FragmentManager) : FragmentPagerAdapter(fm, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {
 
