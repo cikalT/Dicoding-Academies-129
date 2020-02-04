@@ -4,8 +4,8 @@ import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import cikal.dicoding.submission2.ui.detail.DetailCatalogueActivity
 import cikal.dicoding.submission2.R
 import cikal.dicoding.submission2.data.source.local.entity.MovieEntity
 import kotlinx.android.synthetic.main.item_content.view.*
@@ -45,10 +45,9 @@ class MovieAdapter : RecyclerView.Adapter<MovieAdapter.MovieViewHolder>() {
                 iv_poster.setImageResource(resources.getIdentifier(mDrawableName, "drawable", context.packageName))
 
                 itemView.setOnClickListener {
-                    Toast.makeText(context, movie.movieTitle, Toast.LENGTH_SHORT).show()
-//                    val intent = Intent(itemView.context, DetailMovieActivity::class.java)
-//                    intent.putExtra(DetailMovieActivity.EXTRA_MOVIE, movie.movieId)
-//                    itemView.context.startActivity(intent)
+                    val intent = Intent(itemView.context, DetailCatalogueActivity::class.java)
+                    intent.putExtra(DetailCatalogueActivity.EXTRA_CONTENT, movie.movieId)
+                    itemView.context.startActivity(intent)
                 }
             }
         }

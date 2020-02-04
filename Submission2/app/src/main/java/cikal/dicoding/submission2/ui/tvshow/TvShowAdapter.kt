@@ -1,10 +1,11 @@
 package cikal.dicoding.submission2.ui.tvshow
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
+import cikal.dicoding.submission2.ui.detail.DetailCatalogueActivity
 import cikal.dicoding.submission2.R
 import cikal.dicoding.submission2.data.source.local.entity.TvShowEntity
 import kotlinx.android.synthetic.main.item_content.view.*
@@ -24,7 +25,7 @@ class TvShowAdapter : RecyclerView.Adapter<TvShowAdapter.TvShowViewHolder>() {
         viewType: Int
     ): TvShowViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_content, parent, false)
-        return TvShowAdapter.TvShowViewHolder(view)
+        return TvShowViewHolder(view)
     }
 
     override fun getItemCount(): Int = listTvShow.size
@@ -44,10 +45,9 @@ class TvShowAdapter : RecyclerView.Adapter<TvShowAdapter.TvShowViewHolder>() {
                 iv_poster.setImageResource(resources.getIdentifier(mDrawableName, "drawable", context.packageName))
 
                 itemView.setOnClickListener {
-                    Toast.makeText(context, tvShow.tvShowTitle, Toast.LENGTH_SHORT).show()
-//                    val intent = Intent(itemView.context, DetailMovieActivity::class.java)
-//                    intent.putExtra(DetailMovieActivity.EXTRA_MOVIE, movie.movieId)
-//                    itemView.context.startActivity(intent)
+                    val intent = Intent(itemView.context, DetailCatalogueActivity::class.java)
+                    intent.putExtra(DetailCatalogueActivity.EXTRA_CONTENT, tvShow.tvShowId)
+                    itemView.context.startActivity(intent)
                 }
             }
         }

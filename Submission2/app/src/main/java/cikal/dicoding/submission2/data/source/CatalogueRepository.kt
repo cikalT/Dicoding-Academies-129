@@ -43,7 +43,7 @@ class CatalogueRepository private constructor(private val remoteDataSource: Remo
     override fun getAllTvShows(): LiveData<List<TvShowEntity>> {
         val tvShowResult = MutableLiveData<List<TvShowEntity>>()
         remoteDataSource.getAllTvShow(object : RemoteDataSource.LoadTvShowsCallback {
-            override fun onAllTvShowsRecived(tvShowsResponse: List<TvShowResponse>) {
+            override fun onAllTvShowsReceived(tvShowsResponse: List<TvShowResponse>) {
                 val tvShowList = ArrayList<TvShowEntity>()
                 for (response in tvShowsResponse) {
                     val tvShow = TvShowEntity(response.tvShowId,
@@ -58,4 +58,45 @@ class CatalogueRepository private constructor(private val remoteDataSource: Remo
         })
         return tvShowResult
     }
+
+    override fun getDetailMovie(contentId: String): LiveData<MovieEntity> {
+        val movieResult = MutableLiveData<MovieEntity>()
+        remoteDataSource.getAllMovie(object : RemoteDataSource.LoadMoviesCallback {
+            override fun onAllMoviesReceived(moviesResponses: List<MovieResponse>) {
+                lateinit var movie: MovieEntity
+                for (response in moviesResponses) {
+                    if (response.movieId == contentId) {
+                        movie = MovieEntity(response.movieId,
+                            response.movieTitle,
+                            response.moviePoster,
+                            response.movieYear,
+                            response.movieDesc)
+                    }
+                }
+                movieResult.postValue(movie)
+            }
+        })
+        return movieResult
+    }
+
+    override fun getDetailTvShow(contentId: String): LiveData<TvShowEntity> {
+        val tvShowResult = MutableLiveData<TvShowEntity>()
+        remoteDataSource.getAllTvShow(object : RemoteDataSource.LoadTvShowsCallback {
+            override fun onAllTvShowsReceived(tvShowsResponse: List<TvShowResponse>) {
+                lateinit var tvShow: TvShowEntity
+                for (response in tvShowsResponse) {
+                    if (response.tvShowId == contentId) {
+                        tvShow = TvShowEntity(response.tvShowId,
+                            response.tvShowTitle,
+                            response.tvShowPoster,
+                            response.tvShowYear,
+                            response.tvShowDesc)
+                    }
+                }
+                tvShowResult.postValue(tvShow)
+            }
+        })
+        return tvShowResult
+    }
+
 }

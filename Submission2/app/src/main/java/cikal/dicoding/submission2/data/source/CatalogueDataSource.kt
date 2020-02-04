@@ -10,4 +10,8 @@ interface CatalogueDataSource {
 
     fun getAllTvShows(): LiveData<List<TvShowEntity>>
 
+    fun getDetailMovie(contentId: String): LiveData<MovieEntity>
+
+    fun getDetailTvShow(contentId: String): LiveData<TvShowEntity>
+
 }

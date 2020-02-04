@@ -2,7 +2,6 @@ package cikal.dicoding.submission2.utils
 
 import cikal.dicoding.submission2.data.source.local.entity.MovieEntity
 import cikal.dicoding.submission2.data.source.local.entity.TvShowEntity
-import cikal.dicoding.submission2.data.source.remote.response.ContentResponse
 import cikal.dicoding.submission2.data.source.remote.response.MovieResponse
 import cikal.dicoding.submission2.data.source.remote.response.TvShowResponse
 
@@ -14,7 +13,7 @@ object DataDummy {
 
         movies.add(
             MovieEntity(
-                "m1",
+                "mv1",
                 "A Star Is Born",
                 "poster_a_start_is_born",
                 "2018",
@@ -24,7 +23,7 @@ object DataDummy {
 
         movies.add(
             MovieEntity(
-                "m2",
+                "mv2",
                 "Alita: Battle Angel",
                 "poster_alita",
                 "2019",
@@ -34,7 +33,7 @@ object DataDummy {
 
         movies.add(
             MovieEntity(
-                "m3",
+                "mv3",
                 "Aquaman",
                 "poster_aquaman",
                 "2018",
@@ -44,7 +43,7 @@ object DataDummy {
 
         movies.add(
             MovieEntity(
-                "m4",
+                "mv4",
                 "Bohemian Rhapsody",
                 "poster_bohemian",
                 "2018",
@@ -54,7 +53,7 @@ object DataDummy {
 
         movies.add(
             MovieEntity(
-                "m5",
+                "mv5",
                 "Creed II",
                 "poster_creed",
                 "2018",
@@ -64,7 +63,7 @@ object DataDummy {
 
         movies.add(
             MovieEntity(
-                "m6",
+                "mv6",
                 "Glass",
                 "poster_glass",
                 "2019",
@@ -74,7 +73,7 @@ object DataDummy {
 
         movies.add(
             MovieEntity(
-                "m7",
+                "mv7",
                 "How to Train Your Dragon: The Hidden World",
                 "poster_how_to_train",
                 "2019",
@@ -84,7 +83,7 @@ object DataDummy {
 
         movies.add(
             MovieEntity(
-                "m8",
+                "mv8",
                 "Avengers: Infinity War",
                 "poster_infinity_war",
                 "2018",
@@ -94,7 +93,7 @@ object DataDummy {
 
         movies.add(
             MovieEntity(
-                "m9",
+                "mv9",
                 "Mortal Engines",
                 "poster_mortal_engines",
                 "2018",
@@ -104,7 +103,7 @@ object DataDummy {
 
         movies.add(
             MovieEntity(
-                "m10",
+                "mv10",
                 "Ralph Breaks the Internet",
                 "poster_ralph",
                 "2018",
@@ -121,7 +120,7 @@ object DataDummy {
 
         movies.add(
             MovieResponse(
-                "m1",
+                "mv1",
                 "A Star Is Born",
                 "poster_a_start_is_born",
                 "2018",
@@ -131,7 +130,7 @@ object DataDummy {
 
         movies.add(
             MovieResponse(
-                "m2",
+                "mv2",
                 "Alita: Battle Angel",
                 "poster_alita",
                 "2019",
@@ -141,7 +140,7 @@ object DataDummy {
 
         movies.add(
             MovieResponse(
-                "m3",
+                "mv3",
                 "Aquaman",
                 "poster_aquaman",
                 "2018",
@@ -151,7 +150,7 @@ object DataDummy {
 
         movies.add(
             MovieResponse(
-                "m4",
+                "mv4",
                 "Bohemian Rhapsody",
                 "poster_bohemian",
                 "2018",
@@ -161,7 +160,7 @@ object DataDummy {
 
         movies.add(
             MovieResponse(
-                "m5",
+                "mv5",
                 "Creed II",
                 "poster_creed",
                 "2018",
@@ -171,7 +170,7 @@ object DataDummy {
 
         movies.add(
             MovieResponse(
-                "m6",
+                "mv6",
                 "Glass",
                 "poster_glass",
                 "2019",
@@ -181,7 +180,7 @@ object DataDummy {
 
         movies.add(
             MovieResponse(
-                "m7",
+                "mv7",
                 "How to Train Your Dragon: The Hidden World",
                 "poster_how_to_train",
                 "2019",
@@ -191,7 +190,7 @@ object DataDummy {
 
         movies.add(
             MovieResponse(
-                "m8",
+                "mv8",
                 "Avengers: Infinity War",
                 "poster_infinity_war",
                 "2018",
@@ -201,7 +200,7 @@ object DataDummy {
 
         movies.add(
             MovieResponse(
-                "m9",
+                "mv9",
                 "Mortal Engines",
                 "poster_mortal_engines",
                 "2018",
@@ -211,7 +210,7 @@ object DataDummy {
 
         movies.add(
             MovieResponse(
-                "m10",
+                "mv10",
                 "Ralph Breaks the Internet",
                 "poster_ralph",
                 "2018",
@@ -435,7 +434,4 @@ object DataDummy {
         return tvShows
     }
 
-    fun generateRemoteDummyContent(movieId: String) : ContentResponse {
-        return ContentResponse(movieId, "This is a dummy content")
-    }
 }

@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import cikal.dicoding.submission2.di.Injection
+import cikal.dicoding.submission2.ui.detail.DetailCatalogueViewModel
 import cikal.dicoding.submission2.ui.movie.MovieViewModel
 import cikal.dicoding.submission2.ui.tvshow.TvShowViewModel
 
@@ -29,6 +30,9 @@ class ViewModelFactory private constructor(private val mCatalogueRepository: Cat
             }
             modelClass.isAssignableFrom(TvShowViewModel::class.java) -> {
                 TvShowViewModel(mCatalogueRepository) as T
+            }
+            modelClass.isAssignableFrom(DetailCatalogueViewModel::class.java) -> {
+                DetailCatalogueViewModel(mCatalogueRepository) as T
             }
             else -> throw Throwable("Unknown ViewModel class: " + modelClass.name)
         }

@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import cikal.dicoding.submission2.R
 import cikal.dicoding.submission2.viewmodel.ViewModelFactory
 import kotlinx.android.synthetic.main.fragment_tv_show.*
@@ -36,7 +37,7 @@ class TvShowFragment : Fragment() {
             })
 
             with(rv_tv_show) {
-                layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context)
+                layoutManager = LinearLayoutManager(context)
                 setHasFixedSize(true)
                 adapter = tvShowAdapter
             }

@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import cikal.dicoding.submission2.R
 import cikal.dicoding.submission2.viewmodel.ViewModelFactory
 import kotlinx.android.synthetic.main.fragment_movie.*
@@ -36,7 +37,7 @@ class MovieFragment : Fragment() {
             })
 
             with(rv_movie) {
-                layoutManager = androidx.recyclerview.widget.LinearLayoutManager(context)
+                layoutManager = LinearLayoutManager(context)
                 setHasFixedSize(true)
                 adapter = movieAdapter
             }
