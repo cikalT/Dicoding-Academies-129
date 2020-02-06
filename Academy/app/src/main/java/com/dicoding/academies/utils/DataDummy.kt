@@ -1,16 +1,19 @@
 package com.dicoding.academies.utils
 
+import com.dicoding.academies.data.source.local.entity.ContentEntity
 import com.dicoding.academies.data.source.local.entity.CourseEntity
+import com.dicoding.academies.data.source.local.entity.CourseWithModule
 import com.dicoding.academies.data.source.local.entity.ModuleEntity
-import com.dicoding.academies.data.source.remote.response.ContentResponse
 import com.dicoding.academies.data.source.remote.response.CourseResponse
 import com.dicoding.academies.data.source.remote.response.ModuleResponse
 
 import java.util.ArrayList
+import com.dicoding.academies.data.source.remote.response.ContentResponse
+
 
 object DataDummy {
 
-    fun generateDummyCourses(): ArrayList<CourseEntity> {
+    fun generateDummyCourses(): List<CourseEntity> {
 
         val courses = ArrayList<CourseEntity>()
 
@@ -47,7 +50,7 @@ object DataDummy {
         return courses
     }
 
-    fun generateDummyModules(courseId: String): ArrayList<ModuleEntity> {
+    fun generateDummyModules(courseId: String): List<ModuleEntity> {
 
         val modules = ArrayList<ModuleEntity>()
 
@@ -86,7 +89,7 @@ object DataDummy {
         return modules
     }
 
-    fun generateRemoteDummyCourses(): ArrayList<CourseResponse> {
+    fun generateRemoteDummyCourses(): List<CourseResponse> {
 
         val courses = ArrayList<CourseResponse>()
 
@@ -118,7 +121,7 @@ object DataDummy {
         return courses
     }
 
-    fun generateRemoteDummyModules(courseId: String): ArrayList<ModuleResponse> {
+    fun generateRemoteDummyModules(courseId: String): List<ModuleResponse> {
 
         val modules = ArrayList<ModuleResponse>()
 
@@ -157,7 +160,20 @@ object DataDummy {
         return modules
     }
 
-    fun generateRemoteDummyContent(moduleId: String): ContentResponse {
-        return ContentResponse(moduleId, "This is a dummy content")
+    fun generateRemoteDummyContent(moduleId: String): ContentResponse =
+            ContentResponse(moduleId, "This is a dummy content")
+
+    fun generateDummyCourseWithModules(course: CourseEntity, bookmarked: Boolean): CourseWithModule {
+        course.bookmarked = bookmarked
+        return CourseWithModule(course, generateDummyModules(course.courseId))
+    }
+
+    private fun generateDummyContent(moduleId: String): ContentEntity =
+            ContentEntity("This is a dummy content")
+
+    fun generateDummyModuleWithContent(courseId: String): ModuleEntity {
+        val moduleEntity = generateDummyModules(courseId)[0]
+        moduleEntity.contentEntity = generateDummyContent(moduleEntity.moduleId)
+        return moduleEntity
     }
 }
